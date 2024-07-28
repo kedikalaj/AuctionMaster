@@ -1,0 +1,36 @@
+﻿@model List<AuctionMaster.Models.Listing>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Active Listings</a>
+</p>
+
+@foreach(var listing in Model)
+{
+    
+    <div class="container" style="background-color:rgba(138,129,133,0.6); margin-top:40px; margin-bottom:40px; padding:20px; border-radius:15px;">
+
+        <div class="row">
+            <div class="col col-6 col-lg-5">
+                <img src="~/Images/@listing.ImagePath" style="max-width:400px; max-height:400px;"/>
+            </div>
+            <div class="col col-6 col-lg-5">
+                <h5><a asp-action="Details" asp-route-id="@listing.Id" style="color:black; ">@listing.Title</a></h5>
+                <div>@listing.Description</div>
+                <div>Bid: $@listing.Price.ToString("N2")</div>
+                <div>@listing.User.UserName</div>
+            </div>
+        </div>
+
+    </div>
+}
+
+@if(!Model.Any()){
+
+  <h3>No active listings at this moment!</h3>
+}
