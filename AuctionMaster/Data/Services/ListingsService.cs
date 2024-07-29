@@ -18,5 +18,17 @@ namespace AuctionMaster.Data.Services
             var applicationDbContext = _context.Listings.Include(l => l.User);
             return applicationDbContext;
         }
+
+        public async Task Create(Listing listing)
+        {
+            _context.Listings.Add(listing);
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task<Listing> GetById(int? id)
+        {
+            var listing = await _context.Listings.Where(x => x.Id == id).Include(l => l.User).Include(l => l.Comments).Include(l => l.Bids).ThenInclude(l => l.User).FirstOrDefaultAsync();
+            return listing;
+        }
     }
 }
