@@ -7,5 +7,6 @@ namespace AuctionMaster.Data.Interfaces
         IQueryable<Listing> GetAll();
         Task Create(Listing listing);
         Task<Listing> GetById(int? id);
+        Task SaveChanges();
     }
 }

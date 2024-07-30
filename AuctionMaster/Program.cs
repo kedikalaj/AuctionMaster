@@ -16,6 +16,9 @@ builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.Requ
     .AddEntityFrameworkStores<ApplicationDbContext>();
 builder.Services.AddControllersWithViews().AddRazorRuntimeCompilation();
 builder.Services.AddScoped<IListingsService, ListingsService>();
+builder.Services.AddScoped<IBidService, BidService>();
+builder.Services.AddScoped<ICommentsService, CommentsService>();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

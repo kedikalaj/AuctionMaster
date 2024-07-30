@@ -30,5 +30,10 @@ namespace AuctionMaster.Data.Services
             var listing = await _context.Listings.Where(x => x.Id == id).Include(l => l.User).Include(l => l.Comments).Include(l => l.Bids).ThenInclude(l => l.User).FirstOrDefaultAsync();
             return listing;
         }
+
+        public async Task SaveChanges()
+        {
+            await _context.SaveChangesAsync();
+        }
     }
 }
