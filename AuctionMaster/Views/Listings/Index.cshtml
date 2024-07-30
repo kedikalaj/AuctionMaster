@@ -1,4 +1,4 @@
-﻿@model List<AuctionMaster.Models.Listing>
+﻿@model PaginatedList<AuctionMaster.Models.Listing>
 
 @{
     ViewData["Title"] = "Index";
@@ -32,5 +32,26 @@
 
 @if(!Model.Any()){
 
-  <h3>No active listings at this moment!</h3>
+  <h3>No active listings found!</h3>
 }
+
+@{
+    var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
+    var nextDisabled = !Model.HasNextPage ? "disabled" : "";
+}
+
+<div class="d-flex justify-content-center">
+    <a asp-action="Index"
+       asp-route-pageNumber="@(Model.PageIndex - 1)"
+       class="btn btn-default @prevDisabled">
+        Previous
+    </a>
+    <div class="btn" style="cursor: default">
+        Page @Model.PageIndex of @Model.TotalPages
+    </div>
+    <a asp-action="Index"
+       asp-route-pageNumber="@(Model.PageIndex + 1)"
+       class="btn btn-default @nextDisabled">
+        Next
+    </a>
+</div>
